@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Календарь забегов России</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--tx:#14181f;--mut:#667085;--ac:#e8530e;--bd:#e3e6eb;--ev:#fde6d9;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12151b;--card:#1b2029;--tx:#eef0f4;--mut:#98a2b3;--bd:#2a3140;--ev:#4a2a1b}}
+:root[data-theme="dark"]{--bg:#12151b;--card:#1b2029;--tx:#eef0f4;--mut:#98a2b3;--bd:#2a3140;--ev:#4a2a1b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:920px;margin:0 auto;padding:16px}
+h1{font-size:22px;margin:4px 0 2px}.sub{color:var(--mut);font-size:13px;margin:0 0 14px}
+.bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+button,select{background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:8px;padding:7px 12px;font:inherit;cursor:pointer}
+.bar b{flex:1;text-align:center;font-size:17px;min-width:140px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.dow{text-align:center;color:var(--mut);font-size:12px;padding:4px 0}
+.d{min-height:58px;background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:4px 6px;font-size:13px;cursor:pointer;text-align:left}
+.d.o{opacity:.35;cursor:default}.d.e{background:var(--ev);border-color:var(--ac)}.d.s{outline:2px solid var(--ac)}
+.d i{display:block;font-style:normal;color:var(--ac);font-size:11px;font-weight:600;margin-top:2px}
+h2{font-size:16px;margin:20px 0 8px}
+.ev{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:12px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.dt{min-width:64px;text-align:center;border-right:1px solid var(--bd);padding-right:12px}
+.dt b{font-size:22px;display:block;line-height:1}.dt span{font-size:12px;color:var(--mut)}
+.ev h3{margin:0 0 2px;font-size:15px}.m{color:var(--mut);font-size:13px}
+.ev a{display:inline-block;margin-top:6px;background:var(--ac);color:#fff;text-decoration:none;padding:5px 12px;border-radius:7px;font-size:13px}
+.tag{font-size:11px;color:var(--mut);margin-left:6px}
+.note{color:var(--mut);font-size:12px;margin-top:16px}
+@media(max-width:520px){.d{min-height:46px;padding:3px}.d i{font-size:10px}}
+</style>
+</head>
+<body>
+<main>
+<h1>🏃 Календарь забегов России</h1>
+<p class="sub">Ближайшие старты · нажмите на день, чтобы увидеть забеги</p>
+<div class="bar">
+<button id="prev" aria-label="Назад">←</button><b id="mt"></b><button id="next" aria-label="Вперёд">→</button>
+<select id="city"></select>
+</div>
+<div class="grid" id="cal"></div>
+<h2 id="lt"></h2>
+<div id="list"></div>
+<p class="note">Данные обновляются автоматически раз в сутки. Последнее обновление: <span id="upd">…</span>. «Сайт организатора» — ссылка на официальный сайт старта, «агрегатор» — на страницу календаря, где есть регистрация. Время старта и открытость регистрации уточняйте на сайте забега.</p>
+</main>
+<script>
+let E=[];
+const MN=["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],MG=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+let y=new Date().getFullYear(),m=new Date().getMonth(),sel=null,city="";
+const $=id=>document.getElementById(id),pad=n=>String(n).padStart(2,"0");
+const cs=$("city");const fillCities=()=>cs.innerHTML='<option value="">Все города</option>'+[...new Set(E.map(e=>e.c))].sort().map(c=>`<option>${c}</option>`).join("");
+const vis=()=>E.filter(e=>!city||e.c===city);
+function card(e){const[,mm,dd]=e.d.split("-");return`<div class="ev"><div class="dt"><b>${+dd}</b><span>${MG[+mm-1]}</span></div><div><h3>${e.n}</h3><div class="m">${e.c}${e.k?" · "+e.k:""}</div><a href="${e.u}" target="_blank" rel="noopener">Регистрация →</a><span class="tag">${e.o?"сайт организатора":"агрегатор"}</span></div></div>`}
+function render(){
+$("mt").textContent=MN[m]+" "+y;
+const f=(new Date(y,m,1).getDay()+6)%7,n=new Date(y,m+1,0).getDate(),pm=new Date(y,m,0).getDate(),V=vis();
+let h=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"].map(x=>`<div class="dow">${x}</div>`).join("");
+for(let i=0;i<f;i++)h+=`<div class="d o">${pm-f+i+1}</div>`;
+for(let d=1;d<=n;d++){const k=`${y}-${pad(m+1)}-${pad(d)}`,c=V.filter(e=>e.d===k).length;
+h+=`<button class="d${c?" e":""}${sel===k?" s":""}" data-k="${k}">${d}${c?`<i>${c} ${c>1?"старта":"старт"}</i>`:""}</button>`}
+$("cal").innerHTML=h;
+const L=sel?V.filter(e=>e.d===sel):V.filter(e=>e.d.startsWith(`${y}-${pad(m+1)}`));
+$("lt").textContent=sel?"Забеги "+(+sel.slice(8))+" "+MG[+sel.slice(5,7)-1]:"Забеги в этом месяце";
+$("list").innerHTML=L.length?L.map(card).join(""):'<p class="m">В этот период стартов в базе нет.</p>';
+}
+$("cal").onclick=e=>{const b=e.target.closest("button[data-k]");if(!b)return;sel=sel===b.dataset.k?null:b.dataset.k;render()};
+$("prev").onclick=()=>{m--;if(m<0){m=11;y--}sel=null;render()};
+$("next").onclick=()=>{m++;if(m>11){m=0;y++}sel=null;render()};
+cs.onchange=()=>{city=cs.value;sel=null;render()};
+fetch("events.json",{cache:"no-cache"}).then(r=>r.json()).then(j=>{
+E=j.events.map(e=>({d:e.date,n:e.name,c:e.city,k:e.distances,u:e.url,o:e.official}));
+fillCities();
+$("upd").textContent=new Date(j.updated_at).toLocaleString("ru-RU",{dateStyle:"long",timeStyle:"short"});
+render()}).catch(()=>{$("list").innerHTML='<p class="m">Не удалось загрузить events.json</p>'});
+render();
+</script>
+</body>
+</html>

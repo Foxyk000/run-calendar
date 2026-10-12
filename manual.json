@@ -1,0 +1,146 @@
+[
+ {
+  "date": "2026-10-18",
+  "name": "Кросс Питер",
+  "city": "Санкт-Петербург",
+  "distances": "",
+  "url": "https://get.run/races/europe/russia/leningradskaya/sankt-peterburg/",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-10-24",
+  "name": "Арена марафон",
+  "city": "Санкт-Петербург",
+  "distances": "5 · 10 · 21,1 · 42,2 км",
+  "url": "https://pushkin-run.ru",
+  "official": true,
+  "source": "manual"
+ },
+ {
+  "date": "2026-10-31",
+  "name": "Железноводск Ultra Trail",
+  "city": "Железноводск",
+  "distances": "5 · 10 · 30 · 50 · 100 км",
+  "url": "https://protrail.run/",
+  "official": true,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-01",
+  "name": "Битцевская прямая — День Народного Единства",
+  "city": "Москва",
+  "distances": "15 · 30 · 50 км",
+  "url": "https://1begovoy.ru/events/gorod/moskva",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-01",
+  "name": "Забег «Белых помпонов»",
+  "city": "Москва",
+  "distances": "3 · 6 · 9 · 12 · 15 км",
+  "url": "https://1begovoy.ru/events/gorod/moskva",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-04",
+  "name": "Пробег-марафон «Покровские пруды», старт 10:00",
+  "city": "Москва",
+  "distances": "15 км · 21,1 · 42,2 км",
+  "url": "https://1begovoy.ru/events/gorod/moskva",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-04",
+  "name": "Братский забег",
+  "city": "Москва",
+  "distances": "1 – 30 км",
+  "url": "https://1begovoy.ru/events/gorod/moskva",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-04",
+  "name": "Самарский полумарафон «В беге мы едины»",
+  "city": "Самара",
+  "distances": "3 · 10 · 21,1 км",
+  "url": "https://vk.com/volgaman_org",
+  "official": true,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-04",
+  "name": "МарафонЪ «Орден Белого Орла»",
+  "city": "Санкт-Петербург",
+  "distances": "",
+  "url": "https://www.kp.ru/afisha/spb/sport/zabegi-v-sankt-peterburge/",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-08",
+  "name": "Марьинская стрела",
+  "city": "Москва",
+  "distances": "1 – 30 км",
+  "url": "https://1begovoy.ru/events/gorod/moskva",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-08",
+  "name": "Гатчинский полумарафон",
+  "city": "Гатчина",
+  "distances": "2 · 10 · 21,1 км",
+  "url": "http://gatchinahalfmarathon.ru/",
+  "official": true,
+  "source": "manual"
+ },
+ {
+  "date": "2026-11-15",
+  "name": "OpenBand Trails «Буря»",
+  "city": "Московская обл., Кузьминки",
+  "distances": "2 · 5 · 10 · 20 км",
+  "url": "https://openband.run",
+  "official": true,
+  "source": "manual"
+ },
+ {
+  "date": "2026-12-06",
+  "name": "Зимний полумарафон «Европа-Азия»",
+  "city": "Екатеринбург",
+  "distances": "7 · 21,1 км",
+  "url": "https://ea-m.org",
+  "official": true,
+  "source": "manual"
+ },
+ {
+  "date": "2026-12-12",
+  "name": "Borzye Trails Winter",
+  "city": "Кобона, Ленинградская обл.",
+  "distances": "уточняется",
+  "url": "http://tripandrun.ru/borzye_trails",
+  "official": true,
+  "source": "manual"
+ },
+ {
+  "date": "2026-12-13",
+  "name": "Новогодний марафон",
+  "city": "Санкт-Петербург",
+  "distances": "",
+  "url": "https://get.run/races/europe/russia/leningradskaya/sankt-peterburg/",
+  "official": false,
+  "source": "manual"
+ },
+ {
+  "date": "2026-12-20",
+  "name": "Забег Дедов Морозов",
+  "city": "Тула",
+  "distances": "5 · 10 км",
+  "url": "https://moroz.tulamarathon.org",
+  "official": true,
+  "source": "manual"
+ }
+]
